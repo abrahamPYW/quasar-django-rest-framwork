@@ -1,0 +1,22 @@
+{
+  "name": "quasar-app-extension-quasar-django-rest-framwork",
+  "version": "0.0.1",
+  "description": "Django Rest Framework",
+  "author": "Abraham Friessen <47253584+abrahamPYW@users.noreply.github.com>",
+  "license": "MIT",
+  "main": "src/index.js",
+  "repository": {
+    "type": "https://github.com/abrahamPYW/quasar-django-rest-framwork.git",
+    "url": "https://github.com/abrahamPYW/quasar-django-rest-framwork.git"
+  },
+  "bugs": "https://github.com/abrahamPYW/quasar-django-rest-framwork/issues",
+  "homepage": "",
+  "dependencies": {
+    "quasar-ui-quasar-django-rest-framwork": "latest"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0",
+    "yarn": ">= 1.6.0"
+  }
+}
