@@ -47,8 +47,10 @@
 </template>
 
 <script>
+import QdMixinBase from '../mixins/Base.js'
 export default {
   name: 'QdSelect',
+  mixins: [QdMixinBase],
   props: {
     value: [Object, String, Number],
     label: String,
