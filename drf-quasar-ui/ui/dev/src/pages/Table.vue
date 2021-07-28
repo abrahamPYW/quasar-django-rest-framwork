@@ -1,7 +1,7 @@
 <template>
   <qd-table
     :columns="columns"
-    url="test"
+    url="/api/users/"
     title="test"
   />
 </template>
@@ -12,8 +12,12 @@ export default {
     return {
       columns: [
         {
-          name: 'Test',
-          field: 'Test'
+          name: 'username',
+          field: 'username'
+        },
+        {
+          name: 'firstName',
+          field: 'first_name'
         }
       ]
     }

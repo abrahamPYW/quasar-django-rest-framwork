@@ -14,8 +14,8 @@
             <th
               v-for="(col, index) in localColumns"
               :key="index"
-              @mouseenter="mouseOverHeader(index)"
-              @mouseleave="mouseLeaveHeader(index)"
+              @mouseenter="mouseOverHeader(col)"
+              @mouseleave="mouseLeaveHeader(col)"
             >
               <div class="row">
                 <div>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="col text-center text-bold">{{ col.label }}</div>
                 <base-table-filter
-                  ref="filter_icon"
+                  :ref="setFilterRef"
                   :col="col"
                   class="col-1"
                   @applyFilter="applyFilter"
@@ -107,6 +107,7 @@
 <script>
 import BaseTableFilter from './Filter.vue'
 import BaseTableOrder from './Order.vue'
+import BaseMixin from '../../mixins/Base.js'
 export default {
   name: 'QdTable',
   props: {
@@ -156,6 +157,7 @@ export default {
       default: null
     }
   },
+  mixins: [BaseMixin],
   components: {
     BaseTableFilter,
     BaseTableOrder
@@ -164,7 +166,8 @@ export default {
     return {
       fetchedData: {},
       localColumns: [],
-      search: ''
+      search: '',
+      filterRefs: []
     }
   },
   computed: {
@@ -222,7 +225,7 @@ export default {
       }
       return style
     },
-    mouseOverHeader (index) {
+    mouseOverHeader (col) {
       if (typeof this.$refs.filter_icon[index] !== 'undefined') {
         this.$refs.filter_icon[index].showIcon()
         this.$refs.order_icon[index].showIcon()
@@ -272,7 +275,6 @@ export default {
           }
         }
       })
-      console.log(orderedColumns)
       var orderedColumns = columns.filter(obj => {
         return obj.order !== null
       })
@@ -346,11 +348,19 @@ export default {
       columns[index].order = order
       this.$set(this.localColumns, columns)
       this.getData()
+    },
+    setFilterRef (el) {
+      if (el) {
+        this.filterRefs.push(el)
+      }
     }
   },
   mounted () {
     this.contructLocalColumns()
     this.getData(true)
+  },
+  beforeUpdate () {
+    this.filterRefs = []
   }
 }
 </script>

@@ -30,7 +30,7 @@ export default {
       return false
     },
     isVisible () {
-      if (this.Ordered) {
+      if (this.isOrdered) {
         return true
       }
       return this.visible

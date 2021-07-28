@@ -9,10 +9,10 @@ const version = __UI_VERSION__
 
 function install (app) {
   app.component(Select.name, Select)
-  app.component(Dialog.name, Select)
-  app.component(Page.name, Select)
-  app.component(DatePicker.name, Select)
-  app.component(Table.name, Select)
+  app.component(Dialog.name, Dialog)
+  app.component(Page.name, Page)
+  app.component(DatePicker.name, DatePicker)
+  app.component(Table.name, Table)
 }
 
 export {

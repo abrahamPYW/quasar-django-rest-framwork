@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: 'QdPage',
+  name: 'QdDialog',
   props: {
     value: Boolean,
     header: {
