@@ -1,13 +1,15 @@
 <template>
-  <q-btn
-    flat
-    :icon="col.order === 'asc' ? 'fas fa-arrow-up' : 'fas fa-arrow-down'"
-    :color="isOrdered ? 'white' : 'grey-9'"
-    dense
-    size="7px"
-    v-show="isVisible"
-    @click="setOrder"
-  />
+  <div style="min-width: 50px">
+    <q-btn
+      flat
+      :icon="col.order === 'asc' ? 'fas fa-arrow-up' : 'fas fa-arrow-down'"
+      :color="isOrdered ? 'white' : 'grey-9'"
+      dense
+      size="7px"
+      v-show="isVisible"
+      @click="setOrder"
+    />
+  </div>
 </template>
 
 <script>

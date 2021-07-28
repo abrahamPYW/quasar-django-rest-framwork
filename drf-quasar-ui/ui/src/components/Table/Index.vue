@@ -21,7 +21,7 @@
                 <div>
                   <base-table-order
                     :col="col"
-                    ref="order_icon"
+                    :ref="setSortRef"
                     @setOrder="setOrder"
                   />
                 </div>
@@ -226,15 +226,17 @@ export default {
       return style
     },
     mouseOverHeader (col) {
-      if (typeof this.$refs.filter_icon[index] !== 'undefined') {
-        this.$refs.filter_icon[index].showIcon()
-        this.$refs.order_icon[index].showIcon()
+      var i = this.localColumns.indexOf(col)
+      if (i !== -1) {
+        this.localColumns[i].filterRef.showIcon()
+        this.localColumns[i].sortRef.showIcon()
       }
     },
-    mouseLeaveHeader (index) {
-      if (typeof this.$refs.filter_icon[index] !== 'undefined') {
-        this.$refs.filter_icon[index].hideIcon()
-        this.$refs.order_icon[index].hideIcon()
+    mouseLeaveHeader (col) {
+      var i = this.localColumns.indexOf(col)
+      if (i !== -1) {
+        this.localColumns[i].filterRef.hideIcon()
+        this.localColumns[i].sortRef.hideIcon()
       }
     },
     contructLocalColumns () {
@@ -255,7 +257,9 @@ export default {
           align: typeof o.align === 'undefined' ? null : o.align,
           format: typeof o.format === 'undefined' ? null : o.format,
           class: typeof o.class === 'undefined' ? null : o.class,
-          style: typeof o.style === 'undefined' ? null : o.style
+          style: typeof o.style === 'undefined' ? null : o.style,
+          filterRef: null,
+          sortRef:null
         })
       })
       this.localColumns = columns
@@ -339,28 +343,32 @@ export default {
       var index = this.localColumns.indexOf(col)
       columns[index].filter_type = filterType
       columns[index].filter_value = filterValue
-      this.$set(this.localColumns, columns)
+      this.localColumns = columns
       this.getData()
     },
     setOrder (col, order) {
       var columns = this.localColumns
       var index = this.localColumns.indexOf(col)
       columns[index].order = order
-      this.$set(this.localColumns, columns)
+      this.localColumns = columns
       this.getData()
     },
     setFilterRef (el) {
       if (el) {
-        this.filterRefs.push(el)
+        var indexOfCol = this.localColumns.findIndex(obj => obj.field === el.col.field)
+        this.localColumns[indexOfCol].filterRef = el
+      }
+    },
+    setSortRef (el) {
+      if (el) {
+        var indexOfCol = this.localColumns.findIndex(obj => obj.field === el.col.field)
+        this.localColumns[indexOfCol].sortRef = el
       }
     }
   },
   mounted () {
     this.contructLocalColumns()
     this.getData(true)
-  },
-  beforeUpdate () {
-    this.filterRefs = []
   }
 }
 </script>

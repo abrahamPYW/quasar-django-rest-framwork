@@ -1,60 +1,62 @@
 <template>
-  <q-btn-dropdown
-    v-show="isVisible"
-    :color="this.isFiltered ? 'grey-3' : 'grey-9'"
-    flat
-    dense
-    size="7px"
-    icon="fas fa-filter"
-    @show="openDialog()"
-    ref="filter"
-  >
-    <q-list>
-      <div class="q-pa-md text-bold text-primary">Filtrando {{ col.label }}</div>
-      <q-item>
-        <q-item-section>
-          <q-select
-            style="min-width: 150px"
-            square
-            filled
-            outlined
-            v-model="localFilterType"
-            :options="options"
-            label="Filtro"
-            map-options
-            emit-value
-          />
-        </q-item-section>
-        <q-item-section>
-          <q-input
-            style="min-width: 150px"
-            square
-            filled
-            outlined
-            v-model="localFilterValue"
-            label="Busqueda"
-          />
-        </q-item-section>
-      </q-item>
-      <q-item>
-        <q-item-section align="center">
-          <q-btn
-            color="primary"
-            text-color="white"
-            label="Buscar"
-            @click="applyFilter(col, localFilterType, localFilterValue)"
-          />
-          <q-btn
-            color="primary"
-            flat
-            label="Limpar Filtros"
-            @click="resetFilter(col)"
-            v-if="isFiltered"
-          />
-        </q-item-section>
-      </q-item>
-    </q-list>
-  </q-btn-dropdown>
+  <div style="min-width: 40px" class="text-center">
+    <q-btn-dropdown
+      v-show="isVisible"
+      :color="this.isFiltered ? 'grey-3' : 'grey-9'"
+      flat
+      dense
+      size="7px"
+      icon="fas fa-filter"
+      @show="openDialog()"
+      ref="filter"
+    >
+      <q-list>
+        <div class="q-pa-md text-bold text-primary">Filtrando {{ col.label }}</div>
+        <q-item>
+          <q-item-section>
+            <q-select
+              style="min-width: 150px"
+              square
+              filled
+              outlined
+              v-model="localFilterType"
+              :options="options"
+              label="Filtro"
+              map-options
+              emit-value
+            />
+          </q-item-section>
+          <q-item-section>
+            <q-input
+              style="min-width: 150px"
+              square
+              filled
+              outlined
+              v-model="localFilterValue"
+              label="Busqueda"
+            />
+          </q-item-section>
+        </q-item>
+        <q-item>
+          <q-item-section align="center">
+            <q-btn
+              color="primary"
+              text-color="white"
+              label="Buscar"
+              @click="applyFilter(col, localFilterType, localFilterValue)"
+            />
+            <q-btn
+              color="primary"
+              flat
+              label="Limpar Filtros"
+              @click="resetFilter(col)"
+              v-if="isFiltered"
+            />
+          </q-item-section>
+        </q-item>
+      </q-list>
+    </q-btn-dropdown>
+  </div>
 </template>
 
 <script>
@@ -68,7 +70,7 @@ export default {
   data () {
     return {
       visible: false,
-      localFilterType: null,
+      localFilterType: 'icontains',
       localFilterValue: null,
       stringOptions: [
         {
@@ -114,7 +116,9 @@ export default {
   },
   methods: {
     openDialog () {
-      this.localFilterType = this.col.filter_type
+      if (typeof this.col.filter !== 'undefined') {
+        this.localFilterType = this.col.filter_type
+      }
       this.localFilterValue = this.col.filter_value
     },
     showIcon () {
