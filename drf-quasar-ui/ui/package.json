@@ -1,6 +1,6 @@
 {
   "name": "quasar-ui-drf-quasar-ui",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "author": "Abraham Friessen <47253584+abrahamPYW@users.noreply.github.com>",
   "description": "Django Rest Framwork with Quasar Components",
   "license": "MIT",
