@@ -1,5 +1,5 @@
 <template>
-  <div style="min-width: 40px" class="text-center">
+  <div class="text-center">
     <q-btn-dropdown
       v-show="isVisible"
       :color="this.isFiltered ? 'grey-3' : 'grey-9'"

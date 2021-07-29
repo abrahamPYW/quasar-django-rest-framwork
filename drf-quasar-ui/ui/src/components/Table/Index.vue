@@ -16,6 +16,7 @@
               :key="index"
               @mouseenter="mouseOverHeader(col)"
               @mouseleave="mouseLeaveHeader(col)"
+              :style="`min-width: ${col.headerWidth}px`"
             >
               <div class="row">
                 <div>
@@ -239,8 +240,17 @@ export default {
         this.localColumns[i].sortRef.hideIcon()
       }
     },
+    getColHeaderWidth(text) {
+      var font = "16px times new roman";
+      var canvas = document.createElement("canvas");
+      var context = canvas.getContext("2d");
+      context.font = font;
+      var metrics = context.measureText(text)
+      return metrics.width + 110;
+    },
     contructLocalColumns () {
       var columns = []
+      var vm = this
       this.columns.forEach((o, index) => {
         var dataType = this.getDataType(o)
         columns.push({
@@ -259,7 +269,8 @@ export default {
           class: typeof o.class === 'undefined' ? null : o.class,
           style: typeof o.style === 'undefined' ? null : o.style,
           filterRef: null,
-          sortRef:null
+          sortRef:null,
+          headerWidth: vm.getColHeaderWidth(typeof o.label === 'undefined' ? o.field : o.label)
         })
       })
       this.localColumns = columns

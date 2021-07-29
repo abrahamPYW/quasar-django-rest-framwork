@@ -1,5 +1,5 @@
 <template>
-  <div style="min-width: 50px">
+  <div style="min-width: 30px">
     <q-btn
       flat
       :icon="col.order === 'asc' ? 'fas fa-arrow-up' : 'fas fa-arrow-down'"

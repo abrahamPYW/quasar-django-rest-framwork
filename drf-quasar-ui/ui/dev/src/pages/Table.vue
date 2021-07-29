@@ -16,8 +16,18 @@ export default {
           field: 'username'
         },
         {
+          field: 'last_name'
+        },
+        {
+          field: 'phone_number'
+        },
+        {
           name: 'firstName',
           field: 'first_name'
+        },
+        {
+          name: 'Email',
+          field: 'email'
         }
       ]
     }
