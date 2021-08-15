@@ -1,6 +1,6 @@
 <template>
   <q-select
-    :value="value"
+    :modelValue="modelValue"
     :label="label"
     :option-label="optionLabel"
     :option-value="optionValue"
@@ -9,7 +9,7 @@
     :options="myOptions"
     @filter="filterFn"
     :use-input="useInput"
-    @input="changeVal"
+    @update:modelValue="changeVal"
     :filled="filled"
     :error="error"
     :error-message="errorMessage"
@@ -51,7 +51,7 @@ export default {
   name: 'QdSelect',
   mixins: [QdMixinBase],
   props: {
-    value: [Object, String, Number],
+    modelValue: [Object, String, Number],
     label: String,
     optionLabel: {
       type: [String, Function],
@@ -149,14 +149,14 @@ export default {
     changeVal (newVal) {
       if (newVal === null) {
         this.$emit('input_full', null)
-        this.$emit('input', null)
+        this.$emit('update:modelValue', null)
         return
       }
       if (this.emitValue) {
         this.$emit('input_full', newVal)
-        this.$emit('input', newVal[this.optionValue])
+        this.$emit('update:modelValue', newVal[this.optionValue])
       } else {
-        this.$emit('input', newVal)
+        this.$emit('update:modelValue', newVal)
       }
     },
     focus () {
@@ -166,7 +166,7 @@ export default {
       this.localOptions = []
       this.$api.get(`${this.url}${id}/`).then(res => {
         this.localOptions.push(res.data)
-        this.$emit('input', id)
+        this.$emit('update:modelValue', id)
       })
     }
   },

@@ -1,10 +1,11 @@
 <template>
   <div>
     <qd-select
-      url="/api/users/"
+      url="/users/"
       option-label="username"
       option-value="id"
       v-model="model"
+      @update:modelValue="input()"
       label="Select User"
     />
   </div>
@@ -15,6 +16,11 @@ export default {
   data () {
     return {
       model: null
+    }
+  },
+  methods: {
+    input () {
+      console.log('Input')
     }
   }
 }

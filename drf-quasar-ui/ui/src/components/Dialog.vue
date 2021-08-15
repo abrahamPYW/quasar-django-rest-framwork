@@ -24,7 +24,7 @@
       <q-card-actions :align="footerAlign">
         <q-btn color="negative" flat label="Eliminar" v-if="footerDelete" @click="$emit('delete')" />
         <q-btn color="info" flat label="Cancelar" v-if="footerCancel" @click="$emit('cancel')" v-close-popup />
-        <q-btn color="positive" text-color="white" label="Guardar" v-if="footerOk" @click="$emit('ok')" />
+        <q-btn color="positive" text-color="white" :label="footerOkLabel" v-if="footerOk" @click="$emit('ok')" />
       </q-card-actions>
       <slot name="footer"></slot>
     </q-card>
@@ -54,7 +54,11 @@ export default {
       type: String,
       default: ''
     },
-    maximized: Boolean
+    maximized: Boolean,
+    footerOkLabel: {
+      type: String,
+      default: 'Guardar'
+    }
   },
   data () {
     return {

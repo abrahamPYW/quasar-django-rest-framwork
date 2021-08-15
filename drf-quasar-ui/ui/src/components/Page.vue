@@ -1,13 +1,13 @@
 <template>
   <q-page>
     <div class="row justify-between">
-      <div>
-        <slot name="title"><span class="text-center q-pa-md text-h3 text-bold">{{ title }}</span></slot>
+      <div class="q-pa-lg">
+        <slot name="title"><span class="text-center text-grey-9 text-h3 text-bold">{{ title }}</span></slot>
       </div>
-      <div>
+      <div class="q-pa-lg">
         <slot name="center"></slot>
       </div>
-      <div>
+      <div class="q-pa-lg">
         <slot name="right"></slot>
       </div>
     </div>
